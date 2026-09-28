@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        {{ comic.title }} - ComicCraft
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="/static/css/style.css"
+    >
+
+</head>
+
+
+<body>
+
+<header class="preview-header">
+
+    <a
+        href="/"
+        class="back-link"
+    >
+        ← Create Another Comic
+    </a>
+
+    <div>
+        <div class="badge">
+            ✨ Comic Generated
+        </div>
+
+        <h1>
+            {{ comic.title }}
+        </h1>
+    </div>
+
+</header>
+
+
+<main class="container">
+
+    <section class="action-card">
+
+        <div>
+            <h2>Your Comic Is Ready!</h2>
+
+            <p>
+                Review your panels below and download
+                the completed PDF.
+            </p>
+        </div>
+
+        <a
+            href="{{ comic.pdf_url }}"
+            class="primary-button download-button"
+            download
+        >
+            📥 Download PDF
+        </a>
+
+    </section>
+
+
+    <section class="comic-grid">
+
+        {% for panel in comic.panels %}
+
+        <article class="comic-panel">
+
+            <div class="panel-number">
+                PANEL {{ panel.panel_number }}
+            </div>
+
+
+            <div class="panel-image">
+
+                <img
+                    src="{{ panel.image_url }}"
+                    alt="Comic panel {{ panel.panel_number }}"
+                >
+
+            </div>
+
+
+            <div class="panel-content">
+
+                {% if panel.caption %}
+                <div class="caption">
+                    {{ panel.caption }}
+                </div>
+                {% endif %}
+
+
+                {% if panel.scene %}
+                <h3>Scene</h3>
+
+                <p>
+                    {{ panel.scene }}
+                </p>
+                {% endif %}
+
+
+                {% if panel.narration %}
+                <h3>Narration</h3>
+
+                <p>
+                    {{ panel.narration }}
+                </p>
+                {% endif %}
+
+
+                {% if panel.dialogue %}
+                <div class="dialogue">
+                    💬 "{{ panel.dialogue }}"
+                </div>
+                {% endif %}
+
+            </div>
+
+        </article>
+
+        {% endfor %}
+
+    </section>
+
+
+    <section class="bottom-action">
+
+        <a
+            href="{{ comic.pdf_url }}"
+            class="primary-button"
+            download
+        >
+            📥 Download Complete Comic PDF
+        </a>
+
+    </section>
+
+</main>
+
+</body>
+</html>

@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>ComicCraft - AI Comic Creator</title>
+
+    <link
+        rel="stylesheet"
+        href="/static/css/style.css"
+    >
+</head>
+
+<body>
+
+<header class="hero">
+    <div class="hero-content">
+        <div class="badge">
+            ✨ AI Comic Story Creator
+        </div>
+
+        <h1>
+            Turn Your Idea Into
+            <span>an AI Comic</span>
+        </h1>
+
+        <p>
+            Create a complete comic story with
+            AI-generated scenes, dialogue and artwork.
+        </p>
+    </div>
+</header>
+
+
+<main class="container">
+
+    {% if error %}
+    <div class="error-box">
+        <strong>Generation error:</strong>
+        <p>{{ error }}</p>
+    </div>
+    {% endif %}
+
+
+    <section class="card">
+
+        <div class="section-title">
+            <span>01</span>
+            <div>
+                <h2>Story Details</h2>
+                <p>Tell ComicCraft what your story should be about.</p>
+            </div>
+        </div>
+
+
+        <form
+            id="comicForm"
+            method="POST"
+            action="/generate"
+        >
+
+            <label for="story_prompt">
+                Story idea
+            </label>
+
+            <textarea
+                id="story_prompt"
+                name="story_prompt"
+                rows="5"
+                placeholder="Example: A young student discovers a mysterious robot in his college laboratory..."
+                required
+            >{{ form_data.story_prompt if form_data else '' }}</textarea>
+
+
+            <div class="form-grid">
+
+                <div>
+                    <label for="character_name">
+                        Main character
+                    </label>
+
+                    <input
+                        id="character_name"
+                        type="text"
+                        name="character_name"
+                        value="{{ form_data.character_name if form_data else 'Alex' }}"
+                    >
+                </div>
+
+
+                <div>
+                    <label for="setting">
+                        Setting
+                    </label>
+
+                    <input
+                        id="setting"
+                        type="text"
+                        name="setting"
+                        value="{{ form_data.setting if form_data else 'A futuristic city' }}"
+                    >
+                </div>
+
+
+                <div>
+                    <label for="tone">
+                        Tone
+                    </label>
+
+                    <select
+                        id="tone"
+                        name="tone"
+                    >
+                        <option>Adventurous</option>
+                        <option>Funny</option>
+                        <option>Mysterious</option>
+                        <option>Emotional</option>
+                        <option>Science Fiction</option>
+                        <option>Fantasy</option>
+                    </select>
+                </div>
+
+
+                <div>
+                    <label for="art_style">
+                        Art style
+                    </label>
+
+                    <select
+                        id="art_style"
+                        name="art_style"
+                    >
+                        <option>Cinematic comic book</option>
+                        <option>Anime comic</option>
+                        <option>Western comic</option>
+                        <option>Manga</option>
+                        <option>Digital illustration</option>
+                        <option>Fantasy concept art</option>
+                    </select>
+                </div>
+
+            </div>
+
+
+            <label for="panel_count">
+                Number of panels
+            </label>
+
+            <select
+                id="panel_count"
+                name="panel_count"
+            >
+                <option value="3">3 Panels</option>
+                <option value="4">4 Panels</option>
+                <option value="5" selected>5 Panels</option>
+            </select>
+
+
+            <button
+                type="submit"
+                id="generateButton"
+                class="primary-button"
+            >
+                <span>✨ Create My Comic</span>
+            </button>
+
+        </form>
+
+    </section>
+
+
+    <section class="pipeline">
+
+        <h2>How ComicCraft Works</h2>
+
+        <div class="pipeline-grid">
+
+            <div class="pipeline-item">
+                <div class="pipeline-number">1</div>
+                <h3>Idea</h3>
+                <p>Your story prompt</p>
+            </div>
+
+            <div class="pipeline-arrow">→</div>
+
+            <div class="pipeline-item">
+                <div class="pipeline-number">2</div>
+                <h3>Gemini</h3>
+                <p>Story generation</p>
+            </div>
+
+            <div class="pipeline-arrow">→</div>
+
+            <div class="pipeline-item">
+                <div class="pipeline-number">3</div>
+                <h3>AI Art</h3>
+                <p>Panel generation</p>
+            </div>
+
+            <div class="pipeline-arrow">→</div>
+
+            <div class="pipeline-item">
+                <div class="pipeline-number">4</div>
+                <h3>PDF</h3>
+                <p>Download comic</p>
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<script src="/static/js/script.js"></script>
+
+</body>
+</html>
